@@ -22,3 +22,7 @@ dist/
 
 # Jupyter Notebook
 .ipynb_checkpoints/
+# Rasa
+results/
+.rasa/
+.venv-ui/

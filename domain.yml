@@ -4,20 +4,20 @@ intents:
   - greet
   - goodbye
   - bot_challenge
-  - ask_knowledge
+  - ask_admission_soict
 
 actions:
   - action_rag_retrieval
 
 responses:
   utter_greet:
-    - text: "Xin chào, tôi có thể hỗ trợ bạn tra cứu nội dung trong Cẩm nang Chuyển đổi số."
+    - text: "Xin chào! Tôi là trợ lý tư vấn tuyển sinh Trường Công nghệ Thông tin và Truyền thông (SoICT) - Đại học Bách khoa Hà Nội. Bạn muốn tìm hiểu về ngành học, phương thức xét tuyển, điểm chuẩn hay học phí?"
 
   utter_goodbye:
-    - text: "Tạm biệt, chúc bạn học tốt và ứng dụng hiệu quả chuyển đổi số."
+    - text: "Tạm biệt, chúc bạn có lựa chọn đúng đắn!"
 
   utter_iamabot:
-    - text: "Tôi là một Chatbot AI được hỗ trợ bởi Rasa và Gemini."
+    - text: "Tôi là chatbot AI tư vấn tuyển sinh, được xây dựng bằng Rasa kết hợp tìm kiếm tài liệu (RAG) và Google Gemini."
 
 session_config:
   session_expiration_time: 60

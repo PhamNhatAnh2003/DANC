@@ -2,17 +2,27 @@ version: "3.1"
 
 rules:
 
-- rule: Say goodbye anytime the user says goodbye
+- rule: Chào hỏi
+  steps:
+  - intent: greet
+  - action: utter_greet
+
+- rule: Tạm biệt
   steps:
   - intent: goodbye
   - action: utter_goodbye
 
-- rule: Say 'I am a bot' anytime the user challenges
+- rule: Trả lời khi người dùng hỏi có phải bot không
   steps:
   - intent: bot_challenge
   - action: utter_iamabot
 
-- rule: Kích hoạt RAG khi bot không hiểu câu hỏi (Fallback)
+- rule: Hỏi thông tin tuyển sinh thì tra cứu tài liệu (RAG)
   steps:
-    - intent: nlu_fallback
-    - action: action_rag_retrieval
+  - intent: ask_admission_soict
+  - action: action_rag_retrieval
+
+- rule: Kích hoạt RAG khi bot không chắc ý định (Fallback)
+  steps:
+  - intent: nlu_fallback
+  - action: action_rag_retrieval

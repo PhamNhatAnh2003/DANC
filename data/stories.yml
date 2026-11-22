@@ -1,11 +1,20 @@
 version: "3.1"
 
 stories:
-  - story: Kịch bản người dùng chào hỏi, hỏi kiến thức và tạm biệt
+  - story: Chào hỏi, hỏi tuyển sinh và tạm biệt
     steps:
       - intent: greet
       - action: utter_greet
-      - intent: ask_knowledge
+      - intent: ask_admission_soict
+      - action: action_rag_retrieval
+      - intent: goodbye
+      - action: utter_goodbye
+
+  - story: Hỏi tuyển sinh nhiều câu liên tiếp
+    steps:
+      - intent: ask_admission_soict
+      - action: action_rag_retrieval
+      - intent: ask_admission_soict
       - action: action_rag_retrieval
       - intent: goodbye
       - action: utter_goodbye

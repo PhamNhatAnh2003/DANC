@@ -1,0 +1,61 @@
+{
+  "version": "0.0.1",
+  "configurations": [
+    {
+      "name": "action-server",
+      "runtimeExecutable": ".venv/Scripts/python.exe",
+      "runtimeArgs": [
+        "-m",
+        "rasa",
+        "run",
+        "actions"
+      ],
+      "port": 5055
+    },
+    {
+      "name": "rasa-server",
+      "runtimeExecutable": ".venv/Scripts/python.exe",
+      "runtimeArgs": [
+        "-m",
+        "rasa",
+        "run",
+        "--enable-api",
+        "--cors",
+        "*",
+        "--model",
+        "models/soict-admission.tar.gz"
+      ],
+      "port": 5005
+    },
+    {
+      "name": "streamlit",
+      "runtimeExecutable": ".venv-ui/Scripts/python.exe",
+      "runtimeArgs": [
+        "-m",
+        "streamlit",
+        "run",
+        "streamlit_app.py",
+        "--server.headless",
+        "true",
+        "--server.port",
+        "8501"
+      ],
+      "port": 8501
+    },
+    {
+      "name": "streamlit-test",
+      "runtimeExecutable": ".venv-ui/Scripts/python.exe",
+      "runtimeArgs": [
+        "-m",
+        "streamlit",
+        "run",
+        "streamlit_app.py",
+        "--server.headless",
+        "true",
+        "--server.port",
+        "8502"
+      ],
+      "port": 8502
+    }
+  ]
+}

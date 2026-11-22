@@ -1,0 +1,64 @@
+# Bộ câu hỏi đánh giá RAG. Chạy: python scripts/evaluate_rag.py
+# expected: các chuỗi PHẢI xuất hiện (không phân biệt hoa thường) trong đoạn tài liệu tìm được / câu trả lời.
+# Khi sửa số liệu trong docs/admission, nhớ sửa expected tương ứng.
+
+questions:
+  # --- Chỉ tiêu ---
+  - question: Năm 2026 Trường CNTT&TT tuyển bao nhiêu sinh viên?
+    expected: ["1060"]
+  - question: Chỉ tiêu ngành Khoa học máy tính IT1 năm 2026 là bao nhiêu?
+    expected: ["300"]
+  - question: Năm 2024 SoICT tuyển bao nhiêu sinh viên?
+    expected: ["1020"]
+  - question: Chỉ tiêu ngành Khoa học dữ liệu và trí tuệ nhân tạo năm 2026?
+    expected: ["160"]
+
+  # --- Điểm chuẩn ---
+  - question: Điểm chuẩn ngành Khoa học máy tính năm 2025 theo điểm thi THPT?
+    expected: ["29.19"]
+  - question: Điểm chuẩn IT2 năm 2024 theo điểm thi tốt nghiệp THPT là bao nhiêu?
+    expected: ["28.48"]
+  - question: Điểm chuẩn đánh giá tư duy ngành IT-E10 năm 2025?
+    expected: ["86.97"]
+  - question: Năm 2023 điểm chuẩn TSA ngành Khoa học máy tính bao nhiêu?
+    expected: ["83.9"]
+  - question: Điểm chuẩn ngành An toàn không gian số năm 2026 theo điểm THPT?
+    expected: ["29.01"]
+  - question: Ngành nào có điểm chuẩn cao nhất Bách khoa năm 2026?
+    expected: ["IT-E10", "29.54"]
+  - question: Điểm chuẩn xét tuyển tài năng ngành Khoa học máy tính năm 2025?
+    expected: ["93.92"]
+
+  # --- Phương thức, tổ hợp ---
+  - question: Trường có những phương thức tuyển sinh nào?
+    expected: ["tài năng", "tư duy", "THPT"]
+  - question: Tổ hợp xét tuyển ngành IT1 năm 2026 gồm những tổ hợp nào?
+    expected: ["A00", "A01", "K01"]
+  - question: Bài thi đánh giá tư duy kéo dài bao lâu?
+    expected: ["150 phút"]
+  - question: Năm 2026 Bách khoa bỏ những tổ hợp nào?
+    expected: ["A02", "D26", "D28", "D29"]
+  - question: IELTS 5.0 được quy đổi thành bao nhiêu điểm năm 2026?
+    expected: ["8 điểm"]
+  - question: Đăng ký thi đánh giá tư duy ở đâu?
+    expected: ["tsa.hust.edu.vn"]
+  - question: Công thức tính điểm tổ hợp K01?
+    expected: ["Toán x 3"]
+
+  # --- Học phí, học bổng ---
+  - question: Học phí ngành Khoa học dữ liệu và trí tuệ nhân tạo năm 2026?
+    expected: ["64-67"]
+  - question: Học phí chương trình chuẩn năm học 2025-2026 bao nhiêu?
+    expected: ["14-17,5"]
+  - question: Điều kiện nhận học bổng khuyến khích học tập loại A?
+    expected: ["3.6"]
+
+  # --- Chương trình đào tạo ---
+  - question: Chương trình Việt - Pháp IT-EP học bằng tiếng gì?
+    expected: ["Pháp"]
+  - question: Chương trình HEDSPI IT-E6 tăng cường ngoại ngữ gì?
+    expected: ["Nhật"]
+  - question: Những chương trình nào của SoICT học bằng tiếng Anh?
+    expected: ["IT-E7", "IT-E10", "IT-E15"]
+  - question: Khác nhau giữa Khoa học máy tính và Kỹ thuật máy tính?
+    expected: ["IT1", "IT2"]

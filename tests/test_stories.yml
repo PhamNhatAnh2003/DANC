@@ -1,91 +1,57 @@
-#### This file contains tests to evaluate that your bot behaves as expected.
-#### If you want to learn more, please see the docs: https://rasa.com/docs/rasa/testing-your-assistant
+# Chạy: rasa test
+# Kiểm tra bot nhận đúng ý định và gọi đúng hành động.
 
 stories:
-- story: happy path 1
+- story: chào hỏi
   steps:
   - user: |
-      hello there!
+      xin chào
     intent: greet
   - action: utter_greet
-  - user: |
-      amazing
-    intent: mood_great
-  - action: utter_happy
 
-- story: happy path 2
+- story: hỏi tuyển sinh rồi tạm biệt
   steps:
   - user: |
-      hello there!
+      chào bạn
     intent: greet
   - action: utter_greet
   - user: |
-      amazing
-    intent: mood_great
-  - action: utter_happy
+      học phí ngành khoa học máy tính bao nhiêu
+    intent: ask_admission_soict
+  - action: action_rag_retrieval
   - user: |
-      bye-bye!
+      cảm ơn, tạm biệt
     intent: goodbye
   - action: utter_goodbye
 
-- story: sad path 1
+- story: hỏi nhiều câu tuyển sinh
   steps:
   - user: |
-      hello
-    intent: greet
-  - action: utter_greet
+      soict có những ngành nào
+    intent: ask_admission_soict
+  - action: action_rag_retrieval
   - user: |
-      not good
-    intent: mood_unhappy
-  - action: utter_cheer_up
-  - action: utter_did_that_help
-  - user: |
-      yes
-    intent: affirm
-  - action: utter_happy
+      điểm chuẩn ngành kỹ thuật máy tính năm ngoái
+    intent: ask_admission_soict
+  - action: action_rag_retrieval
 
-- story: sad path 2
+- story: hỏi phương thức xét tuyển
   steps:
   - user: |
-      hello
-    intent: greet
-  - action: utter_greet
-  - user: |
-      not good
-    intent: mood_unhappy
-  - action: utter_cheer_up
-  - action: utter_did_that_help
-  - user: |
-      not really
-    intent: deny
-  - action: utter_goodbye
+      trường xét tuyển bằng những phương thức nào
+    intent: ask_admission_soict
+  - action: action_rag_retrieval
 
-- story: sad path 3
+- story: hỏi có phải bot
   steps:
   - user: |
-      hi
-    intent: greet
-  - action: utter_greet
-  - user: |
-      very terrible
-    intent: mood_unhappy
-  - action: utter_cheer_up
-  - action: utter_did_that_help
-  - user: |
-      no
-    intent: deny
-  - action: utter_goodbye
-
-- story: say goodbye
-  steps:
-  - user: |
-      bye-bye!
-    intent: goodbye
-  - action: utter_goodbye
-
-- story: bot challenge
-  steps:
-  - user: |
-      are you a bot?
+      bạn có phải người thật không
     intent: bot_challenge
   - action: utter_iamabot
+
+- story: tạm biệt
+  steps:
+  - user: |
+      bye
+    intent: goodbye
+  - action: utter_goodbye

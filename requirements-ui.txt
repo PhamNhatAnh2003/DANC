@@ -1,0 +1,4 @@
+# Giao diện Streamlit - cài trong môi trường ảo riêng (.venv-ui)
+# để không xung đột phiên bản numpy/protobuf/packaging với Rasa.
+streamlit==1.39.0
+requests==2.32.3
