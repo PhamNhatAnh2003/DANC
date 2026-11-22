@@ -15,3 +15,6 @@ Write-Host "Đang khởi động 3 cửa sổ. Đợi ~1 phút đến khi:"
 Write-Host "  - cửa sổ Action Server hiện 'Starting action endpoint server'"
 Write-Host "  - cửa sổ Rasa Server hiện 'Rasa server is up and running'"
 Write-Host "rồi mở http://localhost:8501"
+
+
+# powershell -ExecutionPolicy Bypass -File .\run_all.ps1
