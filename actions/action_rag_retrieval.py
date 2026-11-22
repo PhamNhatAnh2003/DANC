@@ -133,10 +133,11 @@ class ActionRAGRetrieval(Action):
             else "Chưa có lịch sử trò chuyện."
         )
 
-        # Ghép câu hỏi trước để truy vấn hiểu các câu hỏi nối tiếp ("ngành đó", "còn học phí?")
+        # Câu hỏi nối tiếp ("ngành đó", "còn học phí?") -> viết lại thành câu hỏi đầy đủ để tìm kiếm
         search_query = user_message
         if len(user_messages_only) >= 2:
-            search_query = f"{user_messages_only[-2]}. {user_message}"
+            search_query = self._rewrite_query(chat_history_str, user_message, user_messages_only[-2])
+            print(f"[INFO] Truy vấn tìm kiếm: {search_query}")
 
         collection = _load_collection()
         if collection is None or collection.count() == 0:
@@ -155,13 +156,36 @@ class ActionRAGRetrieval(Action):
                 dispatcher.utter_message(text=NOT_FOUND_ANSWER)
                 return []
             context = self._build_context(docs)
-            response = self._generate_answer(user_message, context, chat_history_str)
+            question = user_message
+            if search_query != user_message:  # có câu hỏi đã viết lại -> nêu rõ cho Gemini
+                question = f"{user_message}\n(Câu hỏi đầy đủ: {search_query})"
+            response = self._generate_answer(question, context, chat_history_str)
             dispatcher.utter_message(text=response)
         except Exception as e:
             print(f"[ERROR action_rag_retrieval]: {e}")
             dispatcher.utter_message(text=ERROR_ANSWER)
 
         return []
+
+    def _rewrite_query(self, chat_history: str, question: str, previous_question: str) -> str:
+        """Viết lại câu hỏi nối tiếp thành câu hỏi độc lập (query rewriting).
+        Lỗi / quá giờ -> quay về cách ghép câu hỏi trước + câu hiện tại."""
+        prompt = f"""Dựa vào lịch sử hội thoại, hãy viết lại câu hỏi cuối của người dùng thành MỘT câu hỏi đầy đủ,
+tự hiểu được mà không cần lịch sử (thay "ngành này", "năm đó", "còn ... thì sao" bằng đối tượng cụ thể).
+Nếu câu hỏi đã đầy đủ thì giữ nguyên. Chỉ trả về câu hỏi, không giải thích.
+
+[Lịch sử]
+{chat_history}
+
+Câu hỏi cuối: {question}
+Câu hỏi đầy đủ:"""
+        try:
+            rewritten = call_gemini(prompt).strip().strip('"').split("\n")[0]
+            if 3 <= len(rewritten) <= 300:
+                return rewritten
+        except Exception as e:
+            print(f"[WARNING] Không viết lại được câu hỏi: {e}")
+        return f"{previous_question}. {question}"
 
     def _search_chromadb(
         self, collection: Any, query: str, top_k: int = 10

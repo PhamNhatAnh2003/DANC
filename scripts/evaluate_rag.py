@@ -24,6 +24,11 @@ from actions import action_rag_retrieval as rag  # noqa: E402  (nạp model khi 
 
 
 def norm(s: str) -> str:
+    import re
+
+    s = re.sub(r"(\d)\.(\d{3})(?!\d)", r"\1\2", s)  # 1.020 == 1020 (dấu chấm phân cách hàng nghìn)
+    s = re.sub(r"(\d),(\d)", r"\1.\2", s)  # 29,19 == 29.19 (dấu thập phân kiểu Việt)
+    s = s.replace("*", "")  # bỏ in đậm markdown
     return " ".join(s.lower().split())
 
 
